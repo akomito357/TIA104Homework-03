@@ -3,10 +3,19 @@ package hw4;
 //例如String s = “Hello World”,執行結果即為dlroW olleH
 
 public class ReverseStr {
+	private String str;
+	
+	public ReverseStr(String str) {
+		this.str = str;
+	}
+	
+	public ReverseStr() {
+		this("Hello World");
+	}
 	
 	public static void main(String[] args) {
 		ReverseStr rev = new ReverseStr();
-		rev.reverse("Hello World");
+		rev.reverse(rev.str);
 	}
 	
 	public void reverse(String str) {
