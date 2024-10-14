@@ -8,12 +8,54 @@ package hw6;
 3. x與y皆正確情況下，會顯示運算後結果
 */
 
+import java.util.InputMismatchException;
+import java.util.Scanner;
+
 public class Calculator {
 	
-	public int powerXY(int x, int y) {
-		
-		return 0;
+	protected int x;
+	protected int y;
+	
+	public Calculator() throws CalException {
+		setXY(inputXY());
 	}
+	
+	public Calculator(int x, int y) throws CalException{
+		int[] xy = {x, y};
+		setXY(xy);
+	}
+	
+	public int[] inputXY() throws InputMismatchException {
+		int[] xy = new int[2];
+		Scanner sc = new Scanner(System.in);
+		
+		System.out.println("請輸入x的值：");
+		xy[0] = sc.nextInt();
+		System.out.println("請輸入y的值：");
+		xy[1] = sc.nextInt();
+		
+		return xy;
+	}
+	
+	
+	public void setXY(int[] xy) throws CalException, InputMismatchException{ 
+		if (xy[0] == 0 && xy[1] == 0) {
+			throw new CalException("0的0次方沒有意義！");
+		} else if (xy[1] < 0) {
+			throw new CalException("次方為負值，結果回傳不為整數！");
+		} else {
+			this.x = xy[0];
+			this.y = xy[1];
+		}
+	}
+
+	
+	public double powerXY(int x, int y) {
+		double ans = Math.pow(x, y);
+		return ans;
+	}
+	
+
 	
 
 }
