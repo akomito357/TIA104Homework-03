@@ -17,7 +17,8 @@ public class Readtxt {
 		File f1 = new File("./files/Sample.txt");
 		long fileSize = f1.length();
 		int countWords = 0;
-		int countWords2 = 0;
+//		int countWords2 = 0;
+//		int countSpace = 0;
 		int countLines = 0;
 
 		
@@ -26,13 +27,22 @@ public class Readtxt {
 			BufferedReader br = new BufferedReader(fr);
 			String line;
 			int i;
-			while ((line = br.readLine()) != null) {
-				countWords += line.length();
+			boolean inline = false;
+			while (((i  = br.read()) != -1)) {
+				countWords ++;
+				if (i == '\n') {
+					countLines ++;
+					// 如果是最後一行，沒有換行符號，這樣會少算一行，還是要給他++行數
+					inline = false;
+				} else {
+					inline = true;
+				}
+			}
+			
+			if (inline) {
 				countLines ++;
 			}
-//			while ((i = br.read()) != -1) {
-//				countWords2 ++;
-//			}
+			
 			
 			
 			br.close();
@@ -42,11 +52,9 @@ public class Readtxt {
 			e.printStackTrace();
 		}
 		
-		System.out.println("Sample.txt檔案共有" + fileSize + "個位元組，" + countWords + "個字元，" + countLines + "列資料。");
-//		System.out.println("這次有" + countWords2 + "個字");
+		System.out.println("Sample.txt檔案共有" + fileSize + "個位元組，" + countWords + "個字元，" + countLines + "列資料。");	
 		
-		
-//		用readline()、read()、記事本、word算出來的字數都不一樣
+//		在windows系統中，換行符號是'/r/n'，一共兩個字元，所以換行符號會多算一倍。
 		
 	}
 	
