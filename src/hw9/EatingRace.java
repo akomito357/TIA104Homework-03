@@ -10,15 +10,15 @@ import java.util.Random;
 
 public class EatingRace implements Runnable{
 	
-	private String name;
+//	private String name;
 	
 	public EatingRace() {
 		
 	};
 	
-	public EatingRace(String name) {
-		this.name = name;
-	}
+//	public EatingRace(String name) {
+//		this.name = name;
+//	}
 
 	public void run() {
 		int goal = 10;
@@ -27,9 +27,9 @@ public class EatingRace implements Runnable{
 		int ranMax = 3000;
 		
 		for (int i = 1; i <= goal; i++) {
-			System.out.println(name + "吃第" + i + "碗飯");
+			System.out.println(Thread.currentThread().getName() + "吃第" + i + "碗飯");
 			if (i == goal) {
-				System.out.println(name + "吃完了！");
+				System.out.println(Thread.currentThread().getName() + "吃完了！");
 			}
 
 			int stopSec = rand.nextInt(ranMax - ranMin) + ranMin;			
@@ -43,10 +43,10 @@ public class EatingRace implements Runnable{
 	
 	
 	public static void main(String args[]) {
-		EatingRace r1 = new EatingRace("饅頭人");
-		Thread t1 = new Thread(r1);
-		EatingRace r2 = new EatingRace("詹姆士");
-		Thread t2 = new Thread(r2);
+		EatingRace r1 = new EatingRace();
+		Thread t1 = new Thread(r1, "饅頭人");
+		EatingRace r2 = new EatingRace();
+		Thread t2 = new Thread(r2, "詹姆士");
 		
 		System.out.println("-----大胃王快食比賽開始！-----");
 		
@@ -60,7 +60,7 @@ public class EatingRace implements Runnable{
 			e.printStackTrace();
 		}
 		
-		System.out.println("-----大胃王快食比賽結束！-----");
+		System.out.print("-----大胃王快食比賽結束！-----");
 	}
 	
 }
