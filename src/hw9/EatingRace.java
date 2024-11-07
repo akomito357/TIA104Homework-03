@@ -32,7 +32,7 @@ public class EatingRace implements Runnable{
 				System.out.println(Thread.currentThread().getName() + "吃完了！");
 			}
 
-			int stopSec = rand.nextInt(ranMax - ranMin) + ranMin;			
+			int stopSec = rand.nextInt(ranMax - ranMin + 1) + ranMin;			
 			try {
 				Thread.sleep(stopSec);
 			} catch (InterruptedException e){
