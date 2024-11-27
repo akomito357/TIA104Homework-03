@@ -10,31 +10,29 @@ import java.util.Date;
 //(1)年/月/日(2)月/日/年(3)日/月/年三選一，而輸入非指定日期數字格式會顯示出提示訊息如圖
 
 public class DateFormatter {
+	Date parseInput;
 
 	// check format
 	public boolean checkFormat(String input) {
 		String regex = "^\\d{8}$";
-
-		if (input.matches(regex)) {
+		DateFormat dfInput = new SimpleDateFormat("yyyyMMdd");
+		dfInput.setLenient(false);  // 關閉日期解析寬鬆模式 = 開啟嚴格模式
+		
+		if (input == null || !input.matches(regex)) {
+			return false;			
+		}
+		
+		try {
+			parseInput = dfInput.parse(input);
 			return true;
-		} else {
+		} catch(ParseException e) {
 			return false;
 		}
 	}
 
 	// convert
-	public String dateformat(String option, String input) {
-		DateFormat dfInput = new SimpleDateFormat("yyyyMMdd");
-		Date parseInput = null;
+	public String dateformat(String option) {
 		String convertDate = null;
-		
-		try {
-			parseInput = dfInput.parse(input);
-			System.out.println(parseInput);
-		} catch(ParseException e) {
-			System.out.println("輸入格式錯誤，請重新輸入！");
-			return "error";
-		}
 		
 		switch (option) {
 		case "1":
@@ -53,7 +51,7 @@ public class DateFormatter {
 			// 日/月/年
 			DateFormat df3 = new SimpleDateFormat("dd/MM/yyyy");
 			convertDate = df3.format(parseInput);
-			System.out.print("日/月/年");
+			System.out.print("日/月/年：");
 			return convertDate;
 		default:
 			return "error";

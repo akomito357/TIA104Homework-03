@@ -28,7 +28,7 @@ public class TestDateFormatter {
 		do {
 			System.out.print("欲格式化成(1)年/月/日(2)月/日/年(3)日/月/年：");
 			String option = sc.next();
-			convertDate = df.dateformat(option, input);
+			convertDate = df.dateformat(option);
 
 			if (convertDate.equals("error")) {
 				System.out.println("輸入不正確，請重新輸入選項！");
